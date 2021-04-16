@@ -42,7 +42,7 @@ script:
 - /bin/cp -rf flutter_packages/ flutter/packages/
 - rm -rf flutter/packages/flutter/lib/src/widgets/navigator.dart
 - cp flutter_packages/flutter/lib/src/widgets/navigator.dart flutter/packages/flutter/lib/src/widgets/navigator.dart
-- flutter analyze --no-pub --no-current-package lib/ test/
+# - flutter analyze --no-pub --no-current-package lib/ test/
 # - flutter test --no-pub --no-sound-null-safety test/
 
 env:
