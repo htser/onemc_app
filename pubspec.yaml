@@ -1,0 +1,39 @@
+name: onemc
+description: onemc app
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  persistent_bottom_nav_bar: any
+  curved_animation_controller: any
+  fluttertoast: any
+  syntax_highlighter: 0.1.1
+  flutter_html: ^1.3.0
+  webview_flutter: any
+  permission_handler: any
+  flutter_svg: any
+  flutter_screenutil: any
+  tencent_kit: any
+  flutter_cache_manager: any
+  dio: ^4.0.0
+  shared_preferences: ^2.0.5
+  convert: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/html/
+    - assets/images/
+    - assets/icons/

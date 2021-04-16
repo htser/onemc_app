@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>在线沙盒 - OneMC</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="x5-page-mode" content="app">
+    <link rel="stylesheet" href="https://static.1mc.site/bd/css/mdui.min.css?ver=1.0.1" />
+    <link rel="stylesheet" href="https://static.1mc.site/v3/css/onemc.css?0413a" />
+    <meta name="keywords" content="OneMC,玩MC小站,编程,程序猿"/>
+    <meta name="description" content="玩MC小站是一个代码学习平台，快来这里与各地的程序猿们分享代码、交流Coding经验叭~" />
+    <meta name="theme-color" content="#39c5bb">
+    <link rel="shortcut icon" href="https://s-bj-88-sso-userdata.oss.dogecdn.com/static/onemc_newlogo.png">
+    <script src="https://static.1mc.site/bd/js/jquery-3.3.1.min.js"></script>
+</head>
+<body class="mdui-theme-primary-blue-grey mdui-theme-accent-blue">
+<link rel="stylesheet" href="//static.1mc.site/v3/css/sandbox.css?0410a" />
+<div class="mdui-container mdui-typo main">
+    <h2>语言</h2>
+    <div class="v2 langlist" data-list-lang></div>
+    <hr>
+    <div class="codelist mdui-shadow-1">
+        <button class="mdui-btn mdui-btn-icon mdui-ripple" onclick="fullScreen()"><i class="mdui-icon material-icons">fullscreen</i></button>
+        <div class="cinput"><div id="editor"></div></div>
+        <div class="coutput">
+
+        </div>
+    </div>
+    <hr>
+    <div class="mdui-btn-group">
+        <button type="button" class="mdui-btn mdui-color-green" id="runCode"><i class="mdui-icon material-icons">play_arrow</i>运行</button>
+        <button type="button" class="mdui-btn" id="upload_btn"><i class="mdui-icon material-icons">file_upload</i>投稿</button>
+        <button type="button" class="mdui-btn" id="search_btn"><i class="mdui-icon material-icons">search</i>查重</button>
+        <button type="button" class="mdui-btn" id="share_btn"><i class="mdui-icon material-icons">share</i>分享</button>
+    </div>
+</div>
+<script src="https://static.1mc.site/v3/cm/lib/codemirror.js"></script>
+<link rel="stylesheet" href="https://static.1mc.site/v3/cm/lib/codemirror.css">
+<link rel="stylesheet" href="https://static.1mc.site/v3/cm/darcula.css">
+<script>window.LanguageList = [{"id":"1","lang_id":"html","lang_name":"HTML","backend":"0","user_level":"0","maxlength":"-1","shell":"echo $code","starter_string":"<html>","filter":"","count":"0","weight":"1","editor_highlight":"htmlmixed;xml;css"},{"id":"2","lang_id":"js","lang_name":"Javascript","backend":"0","user_level":"0","maxlength":"-1","shell":"echo $code","starter_string":"function onemc() { }","filter":"","count":"0","weight":"2","editor_highlight":"javascript"},{"id":"3","lang_id":"php","lang_name":"PHP7.2","backend":"1","user_level":"0","maxlength":"2048","shell":"","starter_string":"<?php ","filter":"","count":"4","weight":"1","editor_highlight":"php;xml;htmlmixed;clike"},{"id":"4","lang_id":"C","lang_name":"C\u8bed\u8a00","backend":"1","user_level":"1","maxlength":"1024","shell":"gcc $FILE$","starter_string":"#include <stdio.h>\r\n","filter":"\/test\/","count":"1","weight":"1","editor_highlight":"text\/x-csrc;clike"}];window.codePostId='';window._code="";</script>
+<script src="https://static.1mc.site/v3/js/sandbox.js?0410b"></script>
+<script>$('[data-lang-id="'+''.toLocaleLowerCase()+'"]').click();</script>
+<script>window.$pos='sandboxIndex';</script>
+<script src="https:tatic.1mc.site/bd/js/mdui.min.js?ver=1.0.1"></script>
+<script src="https://static.1mc.site/bd/js/echarts.min.js"></script>
+<script src="https://static.1mc.site/v3/js/onemc.mainsite.js?0413a"></script>
+</body>
