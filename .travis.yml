@@ -31,6 +31,8 @@ cache:
   directories:
   - "$HOME/.pub-cache"
  
+before_install:
+  - yes | sdkmanager "platforms;android-30"
  
 install:
 - git clone https://github.com/flutter/flutter.git -b stable --depth 1
@@ -42,6 +44,8 @@ script:
 - /bin/cp -rf flutter_packages/ flutter/packages/
 - rm -rf flutter/packages/flutter/lib/src/widgets/navigator.dart
 - cp flutter_packages/flutter/lib/src/widgets/navigator.dart flutter/packages/flutter/lib/src/widgets/navigator.dart
+- yes | sudo $ANDROID_HOME/tools/bin/sdkmanager --licenses
+
 # - flutter analyze --no-pub --no-current-package lib/ test/
 # - flutter test --no-pub --no-sound-null-safety test/
 
