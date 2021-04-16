@@ -39,8 +39,8 @@ install:
 
 script:
 - flutter packages get
-- flutter analyze --no-pub --no-current-package lib/ test/
-- flutter test --no-pub test/
+- flutter analyze --no-pub --no-sound-null-safety --no-current-package lib/ test/
+- flutter test --no-pub --no-sound-null-safety test/
 
 env:
  - BUILD_TIME=$(date +'%Y%m%d%H%M%S') APK_NAME="${TRAVIS_TAG}_${BUILD_TIME}_OneMC.apk"
