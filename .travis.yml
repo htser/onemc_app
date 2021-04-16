@@ -20,7 +20,6 @@ sudo: false
  
 addons:
   apt:
-    # Flutter depends on /usr/lib/x86_64-linux-gnu/libstdc++.so.6 version GLIBCXX_3.4.18
     sources:
     - ubuntu-toolchain-r-test
     packages:
@@ -44,7 +43,7 @@ script:
 - flutter test --no-pub test/
 
 env:
- - BUILD_TIME=$(date +'%Y%m%d%H%M%S') APK_NAME="${TRAVIS_TAG}_${BUILD_TIME}_F4Lab.apk"
+ - BUILD_TIME=$(date +'%Y%m%d%H%M%S') APK_NAME="${TRAVIS_TAG}_${BUILD_TIME}_OneMC.apk"
  
 before_deploy:
 - flutter build apk --no-sound-null-safety
