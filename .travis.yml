@@ -62,4 +62,4 @@ deploy:
   on:
     repo: htser/onemc_app
     branch: main
-    condition: $TRAVIS_TAG =~ /^release-v\d+\.\d+\.\d+/ # when tag match release-vx.x.x, then push a relase and upload apk.
+#    condition: $TRAVIS_TAG =~ /^release-v\d+\.\d+\.\d+/ # when tag match release-vx.x.x, then push a relase and upload apk.
