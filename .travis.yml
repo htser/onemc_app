@@ -56,8 +56,8 @@ before_deploy:
 
 deploy:
   provider: releases
-  user: "htser"
-  password: $GITHUB_PASSWD
+  api_key:
+    secure: "nSwUpG5GjCNspGkuhGVIprCrv/h5N/dSQGsG2HY3RAWr7heBBC1d3rW03IDocmYCMiH9XHLoiYeLKhnrzqfhS8pME4XV+sL+nfxCB3R2bo2U3BvsLDPunlliREWgYzEhppdyIQ3CFQZPXWgvTUp2dHATVYhBNGavvqlDj9JWRF5Y5vgPZrlhruyuwzAUxuix/dlA4th2ay7ECmZBt6H69Tg0BunUuZgvihhNryDavvhsbzHzIiknxgCCGwdX16mHfIKbvkcJvb7wmh7R0rS3oOx+lMhrmEnxNbayo3x2LH8ZqoE0W4rl5kV45wqkCk8hexZnSe462u5VwTiwJSqU1fMhas1cLnNLIzffAl2dj+kwCgf38U7F5RFf+9k64gN93NQk2odj1CFGrDQ5pocI4U2j50SqYnccsgkr1AYfb9TvaRMputpI5tc/8hi4BLScMNUgc/E8BocscP6r3zeGhxgYModLeLFhGSMjZ1wRlLuc2hanhvaBbpb7iYpijE5HF0LHPnL0eFy/+oIAlGVXjfvGPucEWx/2GqBB/N/YYjsp/BfC4wF9fpkhYwNNBFS29/bDasb+lhIT1ZjZxnYRjDMPXzE7xYiIO5Kb/0eydPghTkTs+7j/pMmy4YXx0redWSKXI1NI/y4ycCJ8+k/C2bnC0rnCpl7s8DUa6VC3sio="
   file: $APK_NAME
   skip_cleanup: true
   overwrite: true
