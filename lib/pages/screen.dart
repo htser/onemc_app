@@ -1,3 +1,6 @@
+import 'dart:js';
+import 'package:onemc/main.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:onemc/login_screen.dart';
 import 'package:onemc/theme.dart';
@@ -47,7 +50,6 @@ class MainScreen extends StatelessWidget {
                         .then((result) async {
                       this.onScreenHideButtonPressed();
                     });
-                    ;
                   },
                   child: Text(
                     "登录",
@@ -63,6 +65,20 @@ class MainScreen extends StatelessWidget {
                   },
                   child: Text(
                     "Push Dynamic/Modal Screen",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Fluttertoast.showToast(
+                      msg: "参数："+shortcut,
+                      toastLength: Toast.LENGTH_SHORT,
+                    );
+                  },
+                  child: Text(
+                    "获取 Shortcuts 参数",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -162,7 +178,7 @@ class _TokopediaState extends State<Tokopedia> with TickerProviderStateMixin {
   CurvedAnimationController<Color>? _animationInput;
   CurvedAnimationController<Color>? _animationIcon;
 
-  double get _systemBarHeight => MediaQuery.of(context).padding.top;
+  double get _systemBarHeight => 100;
   double get _appBarHeight => kToolbarHeight + _systemBarHeight;
   double get _appBarPaddingVertical => 10;
   double get _appBarPaddingTop => _systemBarHeight + _appBarPaddingVertical;

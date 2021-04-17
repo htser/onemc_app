@@ -26,6 +26,7 @@ dependencies:
   dio: ^4.0.0
   shared_preferences: ^2.0.5
   convert: any
+  quick_actions: ^0.4.0
 
 dev_dependencies:
   flutter_test:

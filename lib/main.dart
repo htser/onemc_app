@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:onemc/login_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'dart:async';
 import 'dart:io';
@@ -11,10 +10,11 @@ import 'theme.dart';
 import 'pages/screen.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:tencent_kit/tencent_kit.dart';
+import 'package:quick_actions/quick_actions.dart';
 
 const String _TENCENT_APPID = '1108306556';
+String shortcut = "NO";
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +44,6 @@ class MyApp extends StatelessWidget {
 class MainIndex extends StatefulWidget {
   final BuildContext menuScreenContext;
   MainIndex({Key? key, required this.menuScreenContext}) : super(key: key);
-
   @override
   _MainIndexState createState() => _MainIndexState();
 }
@@ -84,6 +83,29 @@ class _MainIndexState extends State<MainIndex> {
     super.initState();
     _controller = PersistentTabController(initialIndex: 0);
     _hideNavBar = false;
+
+    final QuickActions quickActions = QuickActions();
+    quickActions.initialize((String shortcutType) {
+      setState(() {
+        if (shortcutType != null) shortcut = shortcutType;
+      });
+    });
+
+    quickActions.setShortcutItems(<ShortcutItem>[
+      // NOTE: This first action icon will only work on iOS.
+      // In a real world project keep the same file name for both platforms.
+      const ShortcutItem(
+        type: 'action_one',
+        localizedTitle: 'Action one',
+        icon: 'AppIcon',
+      ),
+      // NOTE: This second action icon will only work on Android.
+      // In a real world project keep the same file name for both platforms.
+      const ShortcutItem(
+          type: 'action_two',
+          localizedTitle: 'Action two',
+          icon: 'ic_launcher'),
+    ]);
   }
 
   List<Widget> _buildScreens() {
