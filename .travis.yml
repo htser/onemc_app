@@ -56,8 +56,8 @@ before_deploy:
 
 deploy:
   provider: releases
-  api_key:
-    secure: "yspGg/FbPI4zken6dTKKDV9E+8g2NVDPDQCT/UI771yytMCyZ4UaBJGMbbOZLqF48ENeMa17GdaNB8zMdZO/4ZtvNy6vRWF/5YsNbwl2SV050zyOSRHkf0GftP4Qc/e4eQhz2ROi4U3cUGYA6QYjnbls3AyiKFANp1vz1tDeBCh3imKIxZjO8TJQYvBYfDvrXNoI8yRe3Bih/P/TWWdhCPfo60NsUr5G2YJkPilOaRXFMVIQiE5OC9RsFZH8wgKztVxY7j2W4XXsgAQ0IbnwVGFJV9xaEsFdPA/ZJYIW0M8xrZxCNok0XWDplVGElUa0nQALKSg+Zkr4/ehjd0wSuH70RW9F4xm2iMF91TIO1+dR62hv+QinWQkDGl7pgFV+BagW0ohzaB50w+8mJ4Kg/23pM2rhtgqTQig1DMXButZwD1k0Y7PXwgUmBq5GiCz8UPs5x2919rvS4lDB9V5DU/0KlbxGiQnYarn1zkD2N6EYNkJYIeOhNP/iVc/L6I61SzeWPEHZdKzsba4bAw0WO1I8drt5l8V+oAjK7VbzKHOGQfAJULO3kivUyDg6qGZa+B0vEpKfL3M7clXUMmqjNPKIeAd7XqAekxzPozcQJasKfMx7/XEPPw48w1E96sonZlgLxSur7G+ccbkWEs1sFNFF7NBJORpQCZ27cRzEs60="
+  user: "htser"
+  password: $GITHUB_PASSWD
   file: $APK_NAME
   skip_cleanup: true
   overwrite: true
@@ -65,5 +65,3 @@ deploy:
     repo: htser/onemc_app
     branch: main
 #    condition: $TRAVIS_TAG =~ /^release-v\d+\.\d+\.\d+/ # when tag match release-vx.x.x, then push a relase and upload apk.
-
-
