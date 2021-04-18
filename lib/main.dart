@@ -95,9 +95,9 @@ class _MainIndexState extends State<MainIndex> {
       // NOTE: This first action icon will only work on iOS.
       // In a real world project keep the same file name for both platforms.
       const ShortcutItem(
-        type: 'action_one',
-        localizedTitle: 'Action one',
-        icon: 'AppIcon',
+        type: 'sandbox',
+        localizedTitle: '沙盒',
+        icon: 'ic_code_sandbox',
       ),
       // NOTE: This second action icon will only work on Android.
       // In a real world project keep the same file name for both platforms.

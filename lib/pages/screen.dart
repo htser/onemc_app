@@ -6,7 +6,12 @@ import 'package:onemc/theme.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:curved_animation_controller/curved_animation_controller.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dio/dio.dart';
 import 'modal-screen.dart';
+
+String? userToken;
+dynamic userinfo = false;
 
 class MainScreen extends StatelessWidget {
   final BuildContext menuScreenContext;
@@ -72,7 +77,7 @@ class MainScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     Fluttertoast.showToast(
-                      msg: "参数："+shortcut,
+                      msg: "参数：" + shortcut,
                       toastLength: Toast.LENGTH_SHORT,
                     );
                   },
@@ -177,7 +182,7 @@ class _TokopediaState extends State<Tokopedia> with TickerProviderStateMixin {
   CurvedAnimationController<Color>? _animationInput;
   CurvedAnimationController<Color>? _animationIcon;
 
-  double get _systemBarHeight => 100;
+  double get _systemBarHeight => 20;
   double get _appBarHeight => kToolbarHeight + _systemBarHeight;
   double get _appBarPaddingVertical => 10;
   double get _appBarPaddingTop => _systemBarHeight + _appBarPaddingVertical;
@@ -345,12 +350,180 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   TabController? tabController;
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     tabController = new TabController(length: 5, vsync: this);
+    GetUserInfo();
+  }
+
+  GetUserInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    userToken = await prefs.getString('user_token');
+    if (userToken == null) {
+      userinfo = false;
+    } else {
+      var dio = Dio();
+      Map<String, dynamic> headers = new Map();
+      headers['Cookie'] = 'user:' + userToken!;
+      Options options = new Options(headers: headers);
+      var uData = await dio.get('https://user.1mc.site/api/user/getme',
+          options: options);
+      print(uData.data);
+      if (uData.data['code'] == 200) {
+        setState(() {
+          userinfo = uData;
+        });
+      }
+    }
+  }
+
+  GetUCard() {
+    if (userinfo == false || userinfo == null) {
+      return Container(
+        padding: EdgeInsets.only(top: 10),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height / 2 - 65,
+        decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 5,
+                spreadRadius: 5,
+              )
+            ],
+            color: tealTheme.primaryColor,
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30),
+            )),
+        child: Column(
+          children: <Widget>[
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: tealTheme.primaryColor,
+                    borderRadius: BorderRadius.circular(52.5),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.yellow,
+                        spreadRadius: 2,
+                      )
+                    ]),
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage('assets/images/qqface.jpg'),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 35),
+              child: Text(
+                '点击登录',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Container(
+        padding: EdgeInsets.only(top: 10),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height / 2 - 65,
+        decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 5,
+                spreadRadius: 5,
+              )
+            ],
+            color: tealTheme.primaryColor,
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30),
+            )),
+        child: Column(
+          children: <Widget>[
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: tealTheme.primaryColor,
+                    borderRadius: BorderRadius.circular(52.5),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.yellow,
+                        spreadRadius: 2,
+                      )
+                    ]),
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: NetworkImage(userinfo.data['face']),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'UID: ' + userinfo.data['id'],
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 35),
+              child: Text(
+                userinfo.data['uname'],
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 50, right: 50),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  AccBBtn(
+                      height: 60,
+                      width: 80,
+                      text: '个人资料',
+                      icon: Icons.person,
+                      onTap: () {
+                        print('test');
+                      }),
+                  AccBBtn(
+                      height: 60,
+                      width: 80,
+                      text: '我的收藏',
+                      icon: Icons.star,
+                      onTap: () {
+                        print('test');
+                      }),
+                  AccBBtn(
+                      height: 60,
+                      width: 80,
+                      text: '账号设置',
+                      icon: Icons.settings,
+                      onTap: () {
+                        print('test');
+                      }),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -368,95 +541,7 @@ class _MyHomePageState extends State<MyHomePage>
         color: Colors.white,
         child: Column(
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2 - 65,
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 5,
-                      spreadRadius: 5,
-                    )
-                  ],
-                  color: tealTheme.primaryColor,
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(30),
-                    bottomLeft: Radius.circular(30),
-                  )),
-              child: Column(
-                children: <Widget>[
-                  Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: tealTheme.primaryColor,
-                          borderRadius: BorderRadius.circular(52.5),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.yellow,
-                              spreadRadius: 2,
-                            )
-                          ]),
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: AssetImage('assets/images/qqface.jpg'),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'UID',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w300),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 35),
-                    child: Text(
-                      '用户名',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 23,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50, right: 50),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        AccBBtn(
-                            height: 60,
-                            width: 80,
-                            text: '个人资料',
-                            icon: Icons.person,
-                            onTap: () {
-                              print('test');
-                            }),
-                        AccBBtn(
-                            height: 60,
-                            width: 80,
-                            text: '我的收藏',
-                            icon: Icons.star,
-                            onTap: () {
-                              print('test');
-                            }),
-                        AccBBtn(
-                            height: 60,
-                            width: 80,
-                            text: '账号设置',
-                            icon: Icons.settings,
-                            onTap: () {
-                              print('test');
-                            }),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            GetUCard(),
             Container(
               padding: EdgeInsets.only(top: 40, right: 34, left: 34),
               child: Column(

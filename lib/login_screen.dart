@@ -270,17 +270,17 @@ class _loginScreenState extends State<loginScreen> {
     var formData = FormData.fromMap({
       'account': accountController.value.text,
       'passwd': md5.convert(utf8.encode(passwdController.value.text)).toString(),
-      'app.login': 'true',
+      'app_login': 'true',
       'app_version': 'alpha.channel',
       'app_source': 'onemc'
     });
     var response = await dio.post('https://user.1mc.site/api/user/login', data: formData);
     print(response.data);
-    if(response.data.code!=200){
-      wrongMsg(response.data.msg);
+    if(response.data['code']!=200){
+      wrongMsg(response.data['msg']);
     }else{
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('user_token', response.data.user_token);
+      await prefs.setString('user_token', response.data['user_token']);
       Fluttertoast.showToast(
         msg: "登录成功~",
         toastLength: Toast.LENGTH_SHORT,
